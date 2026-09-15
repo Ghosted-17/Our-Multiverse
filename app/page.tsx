@@ -14,8 +14,7 @@ import {
   UtensilsCrossed,
   Mail,
   X,
-  RotateCw,
-  BookHeart
+  RotateCw
 } from 'lucide-react';
 
 export default function Home() {
@@ -26,7 +25,25 @@ export default function Home() {
     setFlippedCards(prev => ({ ...prev, [index]: !prev[index] }));
   };
 
-  // --- Ayobami's Love Letter split into 2 Secret Parts ---
+  // Ambient Background Image Slideshow (Golden Hearts, Plush Bears & Warm Romance)
+  const bgSlides = [
+    "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1920&q=80", // Golden heart bokeh
+    "https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&w=1920&q=80", // Plush teddy bear
+    "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1920&q=80", // Warm aesthetic hearts
+    "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=1920&q=80", // Cozy golden warmth & bear
+    "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=1920&q=80", // Floating golden lights
+  ];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % bgSlides.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [bgSlides.length]);
+
+  // Ayobami's Love Letter split into 2 Secret Parts
   const secretLetterParts = {
     part1: {
       tag: "Secret Love Letter • Part I",
@@ -40,7 +57,7 @@ export default function Home() {
     }
   };
 
-  // State for the 2 peelable hearts
+  // State for the 2 peelable corner hearts
   const [peeledCorner, setPeeledCorner] = useState<'top' | 'bottom' | null>(null);
   const [activeSecretPart, setActiveSecretPart] = useState<'part1' | 'part2' | null>(null);
 
@@ -196,6 +213,20 @@ export default function Home() {
   return (
     <div className="relative min-h-screen bg-[#0D0D0F] overflow-x-hidden font-sans text-[#F2F1ED] selection:bg-[#C4A77D]/30 selection:text-[#F2F1ED]">
       
+      {/* Fixed Ambient Background Image Slideshow with Obsidian Scrim */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        {bgSlides.map((img, idx) => (
+          <div
+            key={idx}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out bg-cover bg-center ${
+              idx === currentSlide ? 'opacity-45 animate-kenburns' : 'opacity-0'
+            }`}
+            style={{ backgroundImage: `url(${img})` }}
+          />
+        ))}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0D0D0F]/70 via-[#0D0D0F]/55 to-[#0D0D0F]/80" />
+      </div>
+
       {/* Golden Ambient Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[650px] h-[450px] bg-[#C4A77D]/12 blur-[160px] rounded-full pointer-events-none" />
 
@@ -493,7 +524,6 @@ export default function Home() {
           </p>
         </div>
 
-        {/* 1 Column on mobile with zero internal squish; 3 Columns on desktop */}
         <div className="flex flex-col md:grid md:grid-cols-3 gap-5">
           
           {/* Savy Henry - The Best Part */}
