@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
-/* Hide all native scrollbars while preserving mouse wheel / trackpad scrolling */
+/* Ensure no ugly scrollbars appear on carousels */
 .no-scrollbar::-webkit-scrollbar {
-  display: none;
+  display: none !important;
 }
 .no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
 @layer utilities {
@@ -23,4 +23,22 @@
   .rotate-y-180 {
     transform: rotateY(180deg);
   }
+}
+
+@keyframes heartPeel {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(-25deg) skewX(20deg) scale(1.15);
+    opacity: 0.8;
+  }
+  100% {
+    transform: rotate(-45deg) skewX(40deg) scale(0);
+    opacity: 0;
+  }
+}
+
+.animate-peel {
+  animation: heartPeel 0.65s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

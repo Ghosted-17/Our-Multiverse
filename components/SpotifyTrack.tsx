@@ -3,12 +3,11 @@ import React from 'react';
 interface SpotifyTrackProps {
   trackId: string;
   title?: string;
-  compact?: boolean;
 }
 
-export default function SpotifyTrack({ trackId, title, compact = true }: SpotifyTrackProps) {
+export default function SpotifyTrack({ trackId, title }: SpotifyTrackProps) {
   return (
-    <div className="w-full overflow-hidden rounded-xl border border-[#2A2624] bg-[#0D0D0F] shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+    <div className="w-full overflow-hidden rounded-xl border border-[#2A2624] bg-[#0D0D0F]">
       {title && (
         <div className="px-3 py-1.5 border-b border-[#2A2624] text-[10px] text-[#C4A77D] tracking-widest font-mono uppercase">
           {title}
@@ -21,8 +20,7 @@ export default function SpotifyTrack({ trackId, title, compact = true }: Spotify
         frameBorder="0"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
-        scrolling="no"
-        className="rounded-b-xl overflow-hidden block"
+        className="rounded-b-xl block w-full"
       />
     </div>
   );
