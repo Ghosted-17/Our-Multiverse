@@ -1,0 +1,6 @@
+{
+  "name": "Gilded Obsidian",
+  "description": "A refined personal archive of moments, connections, and stories.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
